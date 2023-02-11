@@ -31,6 +31,34 @@ public class Paciente extends Usuario{
 
     }
 
+    public void excluirRegistro() {
+        String id_reg;
+
+        System.out.println("Insira o id do registro: ");
+        Scanner leitor = new Scanner(System.in);
+        id_reg = leitor.nextLine();
+
+        for(int i = 0; i < this.registros.size(); i++) {
+            Registro registro = registros[i];
+            if(registro.id.equals(id_reg)) {
+                registros.remove(i);
+                System.out.println("Registro removido");
+                return;
+            }
+        }
+
+        System.out.println("Registro não encontrado");
+    }
+
+    public void perfil() {
+        System.out.println("Nome: " + this.name);
+
+        System.out.println("Registros");
+        for(Registro registro : this.registros) {
+            registro.show();
+        }
+    }
+
     static Paciente achePorId(ArrayList<Paciente> lista, String id) {
         for(Paciente psicologo: lista) {
             if(psicologo.id.equals(id)) return psicologo;

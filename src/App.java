@@ -31,13 +31,15 @@ public class App {
             System.out.println("Digite a operacao que voce deseja fazer: ");
             System.out.println("1 - Criar usuário.");
             System.out.println("2 - Adicionar registro.");
-            System.out.println("3 - Excluir usuário.");
+            System.out.println("3 - Excluir usuário.");
             System.out.println("4 - Menu do psicólogo");
+            System.out.println("-1 - Sair do programa");
             
             Scanner leitor = new Scanner(System.in);
             escolha = leitor.nextInt();
             if(escolha == 1) {
                 addUser();
+                // printando lista de usuários:
                 for(Psicologo p : psicologos) {
                     System.out.println(p.id);
                 }
@@ -58,7 +60,6 @@ public class App {
                     System.out.println("erro");
                 }
                 else {
-                    System.out.println("entrou");
                     psicologo.MenuPsicologo(pacientes);
                 }
             }
@@ -130,6 +131,7 @@ public class App {
         System.out.println("Id do usuário: ");
         id = leitor.nextLine();
 
+        // achando por id
         for(int i = 0; i < pacientes.size(); i++) {
             Paciente paciente = pacientes.get(i);
             if(paciente.id.equals(id)) {
@@ -152,12 +154,14 @@ public class App {
     }
     static void addRegistro() {
         String id_pac;
+
         Scanner leitor = new Scanner(System.in);
         System.out.println("Informe ID do usuario: ");
         id_pac = leitor.nextLine();
+
         Paciente paciente = Paciente.achePorId(pacientes, id_pac);
         if(paciente == null) {
-            System.out.println("Erro!");
+            System.out.println("Paciente não encontrado");
             return;
         }
         else {
@@ -165,4 +169,18 @@ public class App {
         }
     }
 
+    static void excluirRegistro() {
+        
+        System.out.println("Insira o id do paciente: ");
+        Scanner leitor = new Scanner(System.in);
+
+        String id_pac = leitor.nextLine();
+        Paciente paciente = Paciente.achePorId(id_pac);
+        if(paciente == null) {
+            System.out.println("Paciente não encontrado");
+        }
+        else {
+            paciente.excluirRegistro();
+        }
+    }
 }
