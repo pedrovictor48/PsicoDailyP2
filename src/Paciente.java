@@ -39,7 +39,7 @@ public class Paciente extends Usuario{
         id_reg = leitor.nextLine();
 
         for(int i = 0; i < this.registros.size(); i++) {
-            Registro registro = registros[i];
+            Registro registro = registros.get(i);
             if(registro.id.equals(id_reg)) {
                 registros.remove(i);
                 System.out.println("Registro removido");
