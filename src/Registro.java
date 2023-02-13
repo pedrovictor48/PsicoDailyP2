@@ -1,11 +1,16 @@
 import java.util.ArrayList;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class Registro {
     String id, registro, data;
-    public Registro(String id, String registro, String data) {
+
+    public Registro(String id, String registro) {
         this.id = id;
         this.registro = registro;
-        this.data = data;
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        this.data = formatter.format(new Date());
     }
 
     public static Registro achePorId(ArrayList<Registro> registros, String id) {
