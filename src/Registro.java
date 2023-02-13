@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Registro {
     String id, registro, data;
     public Registro(String id, String registro, String data) {
@@ -6,7 +8,7 @@ public class Registro {
         this.data = data;
     }
 
-    public static achePorId(ArrayList<Registro> registros, String id) {
+    public static Registro achePorId(ArrayList<Registro> registros, String id) {
         for(Registro registro : registros) {
             if(registro.id.equals(id)) {
                 return registro;
@@ -18,6 +20,6 @@ public class Registro {
     public void show() {
         System.out.println("Data: " + this.data);
         System.out.println("Id: " + this.id);
-        System.out.println(this.register);
+        System.out.println(this.registro);
     }
 }

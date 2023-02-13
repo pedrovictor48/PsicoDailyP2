@@ -9,6 +9,7 @@ public class App {
     public static void main(String[] args) throws Exception{
         
         int escolha = -1;
+        Scanner leitor = new Scanner(System.in);
         do  {
             
             // for (Paciente x : pacientes)
@@ -31,11 +32,11 @@ public class App {
             System.out.println("Digite a operacao que voce deseja fazer: ");
             System.out.println("1 - Criar usuário.");
             System.out.println("2 - Adicionar registro.");
-            System.out.println("3 - Excluir usuário.");
+            System.out.println("3 - Excluir usuário.");
             System.out.println("4 - Menu do psicólogo");
             System.out.println("-1 - Sair do programa");
             
-            Scanner leitor = new Scanner(System.in);
+            
             escolha = leitor.nextInt();
             if(escolha == 1) {
                 addUser();
@@ -64,6 +65,8 @@ public class App {
                 }
             }
         } while(escolha != -1);
+        leitor.close();
+
     }
 
     public static void addUser() {
@@ -175,7 +178,7 @@ public class App {
         Scanner leitor = new Scanner(System.in);
 
         String id_pac = leitor.nextLine();
-        Paciente paciente = Paciente.achePorId(id_pac);
+        Paciente paciente = Paciente.achePorId(pacientes, id_pac);
         if(paciente == null) {
             System.out.println("Paciente não encontrado");
         }
