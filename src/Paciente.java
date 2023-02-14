@@ -77,8 +77,9 @@ public class Paciente extends Usuario{
     }
 
     static Paciente achePorId(ArrayList<Paciente> lista, String id) {
-        for(Paciente psicologo: lista) {
-            if(psicologo.id.equals(id)) return psicologo;
+        for(Paciente paciente: lista) {
+            if(paciente.id.equals(id))
+                return paciente;
         }
         return null;
     }

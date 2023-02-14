@@ -34,8 +34,8 @@ public class App {
             System.out.println("1 - Criar usuário.");
             System.out.println("2 - Adicionar registro.");
             System.out.println("3 - Excluir usuário.");
-            System.out.println("4 - Menu do psicólogo");
-            System.out.println("5 - Editar registro");
+            System.out.println("4 - Menu do psicólogo.");
+            System.out.println("5 - Editar registro.");
             System.out.println("-1 - Sair do programa");
             
             
