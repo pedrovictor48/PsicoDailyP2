@@ -35,6 +35,7 @@ public class App {
             System.out.println("2 - Adicionar registro.");
             System.out.println("3 - Excluir usuário.");
             System.out.println("4 - Menu do psicólogo");
+            System.out.println("5 - Editar registro");
             System.out.println("-1 - Sair do programa");
             
             
@@ -64,6 +65,9 @@ public class App {
                 else {
                     psicologo.MenuPsicologo(pacientes);
                 }
+            }
+            else if(escolha == 5) {
+                editarRegistro();
             }
         } while(escolha != -1);
         leitor.close();
@@ -170,6 +174,21 @@ public class App {
         }
         else {
             paciente.addRegistro();
+        }
+    }
+
+    static void editarRegistro() {
+        
+        System.out.println("Insira o id do paciente: ");
+        Scanner leitor = new Scanner(System.in);
+
+        String id_pac = leitor.nextLine();
+        Paciente paciente = Paciente.achePorId(pacientes, id_pac);
+        if(paciente == null) {
+            System.out.println("Paciente não encontrado");
+        }
+        else {
+            paciente.editarRegistro();
         }
     }
 

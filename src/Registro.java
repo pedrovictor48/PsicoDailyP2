@@ -27,4 +27,8 @@ public class Registro {
         System.out.println("Id: " + this.id);
         System.out.println(this.registro);
     }
+
+    public void edit(String novoRegistro) {
+        registro = novoRegistro;
+    }
 }

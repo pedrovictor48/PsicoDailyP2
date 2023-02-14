@@ -17,7 +17,7 @@ public class Paciente extends Usuario{
 
         Scanner leitor = new Scanner(System.in);
 
-        System.out.println("Id: ");
+        System.out.println("Id do registro: ");
         id = leitor.nextLine();
 
         System.out.println("Relato: ");
@@ -25,7 +25,27 @@ public class Paciente extends Usuario{
 
         Registro novoRegistro = new Registro(id, registro);
         this.registros.add(novoRegistro);
+    }
 
+    public void editarRegistro() {
+        String id_reg;
+
+        System.out.println("Insira o id do registro: ");
+        Scanner leitor = new Scanner(System.in);
+        id_reg = leitor.nextLine();
+
+        for(int i = 0; i < this.registros.size(); i++) {
+            Registro registro = registros.get(i);
+            if(registro.id.equals(id_reg)) {
+                System.out.println("Digite o novo registro: ");
+                String novoRegistro = leitor.nextLine();
+                registros.get(i).edit(novoRegistro);
+                System.out.println("Registro alterado.");
+                return;
+            }
+        }
+
+        System.out.println("Registro não encontrado.");
     }
 
     public void excluirRegistro() {
