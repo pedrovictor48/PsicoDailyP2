@@ -13,7 +13,7 @@ public class Paciente extends Usuario{
 
     public void addRegistro() {
 
-        String id, registro, data;
+        String id, registro;
 
         Scanner leitor = new Scanner(System.in);
 
@@ -23,10 +23,7 @@ public class Paciente extends Usuario{
         System.out.println("Relato: ");
         registro = leitor.nextLine();
 
-        System.out.println("Data (dd-mm-yyyy): ");
-        data = leitor.nextLine();
-
-        Registro novoRegistro = new Registro(id, registro, data);
+        Registro novoRegistro = new Registro(id, registro);
         this.registros.add(novoRegistro);
 
     }

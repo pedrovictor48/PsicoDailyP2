@@ -12,16 +12,17 @@ public class App {
         Scanner leitor = new Scanner(System.in);
         do  {
             
-            // for (Paciente x : pacientes)
-            // {
-            //     System.out.println("Pacientes:");
-            //     System.out.println(x.name);
+            for (Paciente x : pacientes)
+            {
+                System.out.println("\nPacientes:");
+                System.out.println(x.name);
                 
-            //     for(Registro r : x.registros) {
-            //         System.out.println("Reg:");
-            //         System.out.println(r.registro);
-            //     }
-            // }
+                for(Registro r : x.registros) {
+                    System.out.println("Registro:");
+                    System.out.println(r.registro);
+                    System.out.println("Data: " + r.data);
+                }
+            }
 
             // for (Psicologo y : psicologos)
             // {
