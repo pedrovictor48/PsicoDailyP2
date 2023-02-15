@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class App {
     static ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
     static ArrayList<Psicologo> psicologos = new ArrayList<Psicologo>();
+    static ArrayList<Consulta> consultas = new ArrayList<Consulta>();
     //static Scanner leitor = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception{
@@ -158,7 +159,7 @@ public class App {
             System.out.println("Informe sua senha:");
             String senha_paci = leitorPaci.nextLine();
             if(paciente.password.equals(senha_paci)){
-                paciente.MenuPaciente(psicologos);
+                paciente.MenuPaciente(psicologos, consultas);
             }else{
                 System.out.println("Senha incorreta:");
             }
@@ -179,7 +180,7 @@ public class App {
             System.out.println("Informe sua senha:");
             String senha_psico = leitorPsico.nextLine();
             if(psicologo.password.equals(senha_psico)){
-                psicologo.MenuPsicologo(pacientes);
+                psicologo.MenuPsicologo(pacientes, consultas);
             }else{
                 System.out.println("Senha incorreta:");
             }  

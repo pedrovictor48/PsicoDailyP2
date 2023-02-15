@@ -9,7 +9,7 @@ public class Psicologo extends Usuario{
         this.crp = crp;
     }
 
-    public void MenuPsicologo(ArrayList<Paciente> listaPacientes)
+    public void MenuPsicologo(ArrayList<Paciente> listaPacientes, ArrayList<Consulta> consultas)
     {
         int escolha = -1;
         Scanner leitor = new Scanner(System.in);
@@ -17,9 +17,10 @@ public class Psicologo extends Usuario{
             System.out.println("\nDigite a operacao que voce deseja fazer: ");
             System.out.println("[1] - Exibir pacientes.");
             System.out.println("[2] - Mostrar registros.");
-            System.out.println("[3] - Visualizar registros.");
+            System.out.println("[3] - Marcar consulta.");
             System.out.println("[4] - Vincular paciente.");
             System.out.println("[5] - Desvincular paciente.");
+            System.out.println("[6] - Desvincular paciente.");
             System.out.println("[-1] - Sair do menu do psicólogo.");
             
             
@@ -30,11 +31,14 @@ public class Psicologo extends Usuario{
             else if(escolha == 2) {
                 ExibirRegistros(listaPacientes);
             }else if(escolha == 3){
-                ExibirRegistros(listaPacientes);
+                marcarConsulta(listaPacientes, consultas);
             }else if(escolha == 4){
                 vincularPaciente(listaPacientes);
             }else if(escolha == 5){
                 desvincularPaciente(listaPacientes);
+            }
+            else if(escolha == 6) {
+                this.exibirConsultas(listaPacientes, consultas);
             }
             else if(escolha != -1){
                 System.out.println("Digite uma opcao valida!");
@@ -120,6 +124,45 @@ public class Psicologo extends Usuario{
         }
 
         paciente.id_psico = "null";
+    }
+
+    public void marcarConsulta(ArrayList<Paciente> listaPaciente, ArrayList<Consulta> consultas) {
+        String id_paciente;
+        Scanner leitor = new Scanner(System.in);
+        id_paciente = leitor.nextLine();
+        Paciente paciente = Paciente.achePorId(listaPaciente, id_paciente);
+        if(paciente == null) {
+            System.out.println("Esse paciente não está vinculado");
+        }
+        else if(!paciente.id_psico.equals(this.id)) {
+            System.out.println("Esse paciente não está vinculado");
+        }
+        else {
+            String id_consulta = leitor.nextLine();
+            Consulta consulta = new Consulta(id_paciente, this.id, id_consulta);
+            boolean flag = false;
+            do {
+                flag = consulta.setHorario(consultas);
+                if(!flag) {
+                    System.out.println("Deseja tentar novamente? (s/n)");
+                    String ans = leitor.nextLine();
+                    if(!ans.equals("s")) {
+                        System.out.println("Consulta não foi marcada");
+                        return;
+                    }
+                }
+            } while(!flag);
+
+            consultas.add(consulta);
+        }
+    }
+
+    public void exibirConsultas(ArrayList<Paciente> paciente, ArrayList<Consulta> consultas) {
+        for(Consulta c : consultas) {
+            if(c.id_psicologo.equals(this.id)) {
+                c.printarDoPsicologo(paciente);
+            }
+        }
     }
 
     static Psicologo achePorId(ArrayList<Psicologo> lista, String id) {

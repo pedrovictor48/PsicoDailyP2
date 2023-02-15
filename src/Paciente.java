@@ -11,7 +11,7 @@ public class Paciente extends Usuario{
         this.id_psico = "null";
     }
 
-    public void MenuPaciente(ArrayList<Psicologo> psicologos){
+    public void MenuPaciente(ArrayList<Psicologo> psicologos, ArrayList<Consulta> consultas){
         int escolha = -1;
         Scanner leitor = new Scanner(System.in);
 
@@ -23,6 +23,7 @@ public class Paciente extends Usuario{
             System.out.println("[4] - Visualizar registros.");
             System.out.println("[5] - Vincular Psicologo.");
             System.out.println("[6] - Desvincular Psicologo.");
+            System.out.println("[7] - Exibir consultas.");
             System.out.println("[-1] - Sair do menu.");
 
             escolha = leitor.nextInt();
@@ -39,6 +40,9 @@ public class Paciente extends Usuario{
                 vincularPsico(psicologos);
             }else if(escolha == 6){
                 desvincularPsicologo();
+            }
+            else if(escolha == 7) {
+                this.exibirConsultas(psicologos, consultas);
             }
             else if(escolha != -1){
                 System.out.println("Digite uma opcao valida!");
@@ -150,6 +154,14 @@ public class Paciente extends Usuario{
         }
         System.out.println("Psicologo desvinculado.");
         this.id_psico = "null";
+    }
+
+    public void exibirConsultas(ArrayList<Psicologo> psicologos, ArrayList<Consulta> consultas) {
+        for(Consulta c : consultas) {
+            if(c.id_paciente.equals(this.id)) {
+                c.printarDoPaciente(psicologos);
+            }
+        }
     }
 
     public static Paciente achePorId(ArrayList<Paciente> lista, String id) {
