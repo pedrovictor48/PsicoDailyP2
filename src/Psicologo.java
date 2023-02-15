@@ -87,9 +87,6 @@ public class Psicologo extends Usuario{
     }
 
     public void vincularPaciente(ArrayList<Paciente> listaPacientes){
-        for(Paciente p : listaPacientes){
-            System.out.println(p.id + p.name);
-        }
 
         Scanner leitor = new Scanner(System.in);
         System.out.println("Digite o id do paciente que voce deseja vincular:");
