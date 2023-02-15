@@ -20,7 +20,7 @@ public class Psicologo extends Usuario{
             System.out.println("[3] - Marcar consulta.");
             System.out.println("[4] - Vincular paciente.");
             System.out.println("[5] - Desvincular paciente.");
-            System.out.println("[6] - Desvincular paciente.");
+            System.out.println("[6] - Exibir consultas.");
             System.out.println("[-1] - Sair do menu do psicólogo.");
             
             
