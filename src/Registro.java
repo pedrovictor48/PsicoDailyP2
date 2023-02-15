@@ -25,7 +25,7 @@ public class Registro {
     public void show() {
         System.out.println("Data: " + this.data);
         System.out.println("Id: " + this.id);
-        System.out.println(this.registro);
+        System.out.println("Registro: " + this.registro);
     }
 
     public void edit(String novoRegistro) {

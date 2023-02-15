@@ -12,17 +12,17 @@ public class App {
         Scanner leitor = new Scanner(System.in);
         do  {
             
-            for (Paciente x : pacientes)
-            {
-                System.out.println("\nPacientes:");
-                System.out.println(x.name);
+            // for (Paciente x : pacientes)
+            // {
+            //     System.out.println("\nPacientes:");
+            //     System.out.println(x.name);
                 
-                for(Registro r : x.registros) {
-                    System.out.println("Registro:");
-                    System.out.println(r.registro);
-                    System.out.println("Data: " + r.data);
-                }
-            }
+            //     for(Registro r : x.registros) {
+            //         System.out.println("Registro:");
+            //         System.out.println(r.registro);
+            //         System.out.println("Data: " + r.data);
+            //     }
+            // }
 
             // for (Psicologo y : psicologos)
             // {
@@ -30,68 +30,65 @@ public class App {
             //     System.out.println(y.name);
             // }
             
-            System.out.println("Digite a operacao que voce deseja fazer: ");
-            System.out.println("1 - Criar usuário.");
-            System.out.println("2 - Adicionar registro.");
-            System.out.println("3 - Excluir usuário.");
-            System.out.println("4 - Menu do psicólogo.");
-            System.out.println("5 - Editar registro.");
-            System.out.println("-1 - Sair do programa");
+            System.out.println("\nDigite a operacao que voce deseja fazer: ");
+            System.out.println("[1] - Criar usuario.");
+            System.out.println("[2] - Excluir usuario.");
+            System.out.println("[3] - Login.");
+            System.out.println("[-1] - Sair do programa");
             
             
             escolha = leitor.nextInt();
             if(escolha == 1) {
                 addUser();
+
                 // printando lista de usuários:
+                System.out.println("\nPrintando Psicologos");
                 for(Psicologo p : psicologos) {
-                    System.out.println(p.id);
+                    System.out.println(p.name);
+                }
+                System.out.println("\nPrintando Pacientes");
+                for(Paciente p : pacientes){
+                    System.out.println(p.name);
                 }
             }
-            else if(escolha == 2) {
-                addRegistro();
-            }
-            else if(escolha == 3) {
+            else if(escolha == 2){
                 excluirUser();
             }
-            else if(escolha == 4) {
-                Scanner leitorPsico = new Scanner(System.in);
-                System.out.println("Informe o ID do psicólogo");
-                String id_psico = leitorPsico.nextLine();
-                Psicologo psicologo = Psicologo.achePorId(psicologos, id_psico);
-                if(psicologo == null) {
-                    //erro
-                    System.out.println("erro");
-                }
-                else {
-                    psicologo.MenuPsicologo(pacientes);
-                }
-            }
-            else if(escolha == 5) {
-                editarRegistro();
+            else if(escolha == 3) {
+                login();
+            }else if(escolha != -1){
+                System.out.println("Opecao invalida.");
             }
         } while(escolha != -1);
         leitor.close();
-
     }
 
     public static void addUser() {
-        Scanner leitor1 = new Scanner(System.in);
-        System.out.println("1 para paciente, 2 para psicólogo");
-        int escolha = leitor1.nextInt();
+        Scanner leitor = new Scanner(System.in);
+        do {
+            System.out.println("\n[1] - para paciente \n[2] - para psicólogo");
+            int escolha = leitor.nextInt();
 
-        if(escolha == 1) {
-            addPaciente();
-        }
-        else {
-            addPsicologo();
-        }
+            if(escolha == 1) {
+                addPaciente();
+                break;
+            }
+            else if(escolha == 2){
+                addPsicologo();
+                break;
+            }else{
+                System.out.println("\nDigite um numero valido");
+            }
+        } while (true);
+        
     }
 
     public static void addPaciente() {
-        String id, name, password, cpf, id_psico;
+        String id, name, password, cpf;
+ 
 
         Scanner leitor = new Scanner(System.in);
-        System.out.println("Id: ");
+        System.out.println("\nId: ");
         id = leitor.nextLine();
 
         System.out.println("Nome: ");
@@ -102,11 +99,8 @@ public class App {
 
         System.out.println("CPF: ");
         cpf = leitor.nextLine();
-        
-        System.out.println("ID do psicologo: ");
-        id_psico = leitor.nextLine();
 
-        Paciente novoPaciente = new Paciente(id, name, password, cpf, id_psico);
+        Paciente novoPaciente = new Paciente(id, name, password, cpf);
         pacientes.add(novoPaciente);
     }
 
@@ -114,7 +108,7 @@ public class App {
         String id, name, password, cpf, crp;
 
         Scanner leitor = new Scanner(System.in);
-        System.out.println("Id: ");
+        System.out.println("\nId: ");
         id = leitor.nextLine();
 
         System.out.println("Nome: ");
@@ -131,6 +125,65 @@ public class App {
 
         Psicologo novoPsicologo = new Psicologo(id, name, password, cpf, crp);
         psicologos.add(novoPsicologo);
+    }
+
+    static void login(){
+        Scanner leitor = new Scanner(System.in);
+        System.out.println("\n[1] - para paciente \n[2] - para psicólogo \n[-1] - Retornar");
+        int escolha = leitor.nextInt();
+        do {
+            if(escolha == 1){
+                loginPaciente();
+                break;
+            }else if(escolha == 2){
+                loginPsicologo();
+                break;
+            }else if(escolha == -1){
+                break;
+            }
+        } while (true);   
+    }
+
+    static void loginPaciente(){
+        Scanner leitorPaci = new Scanner(System.in);
+
+        System.out.println("Informe ID do paciente");
+        String id_paci = leitorPaci.nextLine();
+
+        Paciente paciente = Paciente.achePorId(pacientes, id_paci);
+        if(paciente == null){
+            //erro
+            System.out.println("Paciente nao cadastrado");
+        }else{
+            System.out.println("Informe sua senha:");
+            String senha_paci = leitorPaci.nextLine();
+            if(paciente.password.equals(senha_paci)){
+                paciente.MenuPaciente(psicologos);
+            }else{
+                System.out.println("Senha incorreta:");
+            }
+        }
+    }
+
+    static void loginPsicologo(){
+        Scanner leitorPsico = new Scanner(System.in);
+        
+        System.out.println("Informe o ID do psicólogo");
+        String id_psico = leitorPsico.nextLine();
+        Psicologo psicologo = Psicologo.achePorId(psicologos, id_psico);
+        if(psicologo == null) {
+            //erro
+            System.out.println("Psicologo nao cadastrado");
+        }
+        else {
+            System.out.println("Informe sua senha:");
+            String senha_psico = leitorPsico.nextLine();
+            if(psicologo.password.equals(senha_psico)){
+                psicologo.MenuPsicologo(pacientes);
+            }else{
+                System.out.println("Senha incorreta:");
+            }  
+        }   
     }
 
     static void excluirUser() {
@@ -160,50 +213,12 @@ public class App {
 
         System.out.println("Usuário não encontrado.");
     }
-    static void addRegistro() {
-        String id_pac;
 
-        Scanner leitor = new Scanner(System.in);
-        System.out.println("Informe ID do usuario: ");
-        id_pac = leitor.nextLine();
-
-        Paciente paciente = Paciente.achePorId(pacientes, id_pac);
-        if(paciente == null) {
-            System.out.println("Paciente não encontrado");
-            return;
+    static boolean existPaciente(ArrayList<Paciente> lista, String id){
+        for(Paciente paciente : lista) {
+            if(paciente.id.equals(id)) 
+                return true;
         }
-        else {
-            paciente.addRegistro();
-        }
-    }
-
-    static void editarRegistro() {
-        
-        System.out.println("Insira o id do paciente: ");
-        Scanner leitor = new Scanner(System.in);
-
-        String id_pac = leitor.nextLine();
-        Paciente paciente = Paciente.achePorId(pacientes, id_pac);
-        if(paciente == null) {
-            System.out.println("Paciente não encontrado");
-        }
-        else {
-            paciente.editarRegistro();
-        }
-    }
-
-    static void excluirRegistro() {
-        
-        System.out.println("Insira o id do paciente: ");
-        Scanner leitor = new Scanner(System.in);
-
-        String id_pac = leitor.nextLine();
-        Paciente paciente = Paciente.achePorId(pacientes, id_pac);
-        if(paciente == null) {
-            System.out.println("Paciente não encontrado");
-        }
-        else {
-            paciente.excluirRegistro();
-        }
+        return false;
     }
 }

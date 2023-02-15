@@ -5,10 +5,47 @@ public class Paciente extends Usuario{
     ArrayList<Registro> registros;
     String id_psico;
 
-    public Paciente(String id, String name, String password, String cpf, String id_psico){
+    public Paciente(String id, String name, String password, String cpf){
         super(id, name, password, cpf);
         this.registros = new ArrayList<Registro>();
-        this.id_psico = id_psico;
+        this.id_psico = "null";
+    }
+
+    public void MenuPaciente(ArrayList<Psicologo> psicologos){
+        int escolha = -1;
+        Scanner leitor = new Scanner(System.in);
+
+        do {
+            System.out.println("\nDigite a operacao que voce deseja fazer:");
+            System.out.println("[1] - Adicionar registro.");
+            System.out.println("[2] - Editar registro.");
+            System.out.println("[3] - Excluir registro.");
+            System.out.println("[4] - Visualizar registros.");
+            System.out.println("[5] - Vincular Psicologo.");
+            System.out.println("[6] - Desvincular Psicologo.");
+            System.out.println("[-1] - Sair do menu.");
+
+            escolha = leitor.nextInt();
+
+            if(escolha == 1){
+                addRegistro();
+            }else if(escolha == 2){
+                editarRegistro();
+            }else if(escolha == 3){
+                excluirRegistro();
+            }else if(escolha == 4){
+                perfil();
+            }else if(escolha == 5){
+                vincularPsico(psicologos);
+            }else if(escolha == 6){
+                desvincularPsicologo();
+            }
+            else if(escolha != -1){
+                System.out.println("Digite uma opcao valida!");
+            }
+            
+        } while (escolha != -1);
+
     }
 
     public void addRegistro() {
@@ -70,15 +107,56 @@ public class Paciente extends Usuario{
     public void perfil() {
         System.out.println("Nome: " + this.name);
 
-        System.out.println("Registros");
+        System.out.println("Registros: ");
         for(Registro registro : this.registros) {
             registro.show();
         }
     }
 
-    static Paciente achePorId(ArrayList<Paciente> lista, String id) {
+    public void vincularPsico(ArrayList<Psicologo> psicologos){
+        Scanner leitor = new Scanner(System.in);
+
+        if(!this.id_psico.equals("null")){
+            System.out.println("Voce ja tem um Psicologo");
+            return;
+        }
+
+        System.out.println("ID do psicologo: ");
+        String id_psicologo = leitor.nextLine();
+        
+        Psicologo psicologo = Psicologo.achePorId(psicologos, id_psicologo);
+
+        if (psicologo == null) {
+            System.out.println("Psicologo nao encontrado.");
+            return;
+        } else {
+            this.id_psico = psicologo.id;
+            System.out.println("Paciente vinculado.");
+        }
+    }
+
+    static boolean existPsicologo(ArrayList<Psicologo> lista, String id_psico){
+        for(Psicologo psicologo : lista) {
+            if(psicologo.id.equals(id_psico)) 
+                return true;
+        }
+        return false;
+    }
+
+    public void desvincularPsicologo(){
+        if (this.id_psico.equals("null")) {
+            System.out.println("Voce nao tem psicologo.");
+            return;
+        }
+        System.out.println("Psicologo desvinculado.");
+        this.id_psico = "null";
+    }
+
+    public static Paciente achePorId(ArrayList<Paciente> lista, String id) {
         for(Paciente paciente: lista) {
+            System.out.println(paciente.id + paciente.name);
             if(paciente.id.equals(id))
+                System.out.println("Achou paciente");
                 return paciente;
         }
         return null;
