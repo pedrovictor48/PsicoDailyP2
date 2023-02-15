@@ -8,7 +8,9 @@ public class Consulta {
     Date inicio, termino;
 
     public Consulta(String id_paciente, String id_psicologo, String id_consulta) {
-
+        this.id_paciente = id_paciente;
+        this.id_psicologo = id_psicologo;
+        this.id_consulta = id_consulta;
     }
 
     public boolean batendo(Date ini, Date fin, Consulta consulta) {
@@ -40,8 +42,8 @@ public class Consulta {
             Date date_inicio, date_termino;
 
         try {
-            date_inicio = f.parse(hora_inicio, null);
-            date_termino = f.parse(hora_termino, null);
+            date_inicio = f.parse(hora_inicio);
+            date_termino = f.parse(hora_termino);
         }
         catch (Exception e) {
             System.out.println("Horário inválido");

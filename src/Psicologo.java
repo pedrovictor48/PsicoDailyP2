@@ -129,6 +129,7 @@ public class Psicologo extends Usuario{
     public void marcarConsulta(ArrayList<Paciente> listaPaciente, ArrayList<Consulta> consultas) {
         String id_paciente;
         Scanner leitor = new Scanner(System.in);
+        System.out.println("Insira o id do paciente: ");
         id_paciente = leitor.nextLine();
         Paciente paciente = Paciente.achePorId(listaPaciente, id_paciente);
         if(paciente == null) {
@@ -138,7 +139,9 @@ public class Psicologo extends Usuario{
             System.out.println("Esse paciente não está vinculado");
         }
         else {
+            System.out.println("Insira o id da consulta: ");
             String id_consulta = leitor.nextLine();
+
             Consulta consulta = new Consulta(id_paciente, this.id, id_consulta);
             boolean flag = false;
             do {
