@@ -23,9 +23,9 @@ public class Registro {
     }
 
     public void show() {
-        System.out.println("Data: " + this.data);
-        System.out.println("Id: " + this.id);
-        System.out.println("Registro: " + this.registro);
+        System.out.println("DATA: " + this.data);
+        System.out.println("ID: " + this.id);
+        System.out.println("REGISTRO: " + this.registro);
     }
 
     public void edit(String novoRegistro) {

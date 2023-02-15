@@ -16,15 +16,16 @@ public class Paciente extends Usuario{
         Scanner leitor = new Scanner(System.in);
 
         do {
-            System.out.println("\nDigite a operacao que voce deseja fazer:");
-            System.out.println("[1] - Adicionar registro.");
-            System.out.println("[2] - Editar registro.");
-            System.out.println("[3] - Excluir registro.");
-            System.out.println("[4] - Visualizar registros.");
-            System.out.println("[5] - Vincular Psicologo.");
-            System.out.println("[6] - Desvincular Psicologo.");
-            System.out.println("[7] - Exibir consultas.");
-            System.out.println("[-1] - Sair do menu.");
+            System.out.println("MENU DO PACIENTE\n");
+            System.out.println("[1] - ADICIONAR REGISTRO");
+            System.out.println("[2] - EDITAR REGISTRO");
+            System.out.println("[3] - EXCLUIR REGISTRO");
+            System.out.println("[4] - VISUALIZAR REGISTROS");
+            System.out.println("[5] - VINCULAR PSICOLOGO");
+            System.out.println("[6] - DESVINCULAR PSICOLOGO");
+            System.out.println("[7] - EXIBIR CONSULTAS");
+            System.out.println("[-1] - SAIR DO MENU");
+            System.out.print("DIGITE A OPERACAO: ");
 
             escolha = leitor.nextInt();
 
@@ -45,7 +46,7 @@ public class Paciente extends Usuario{
                 this.exibirConsultas(psicologos, consultas);
             }
             else if(escolha != -1){
-                System.out.println("Digite uma opcao valida!");
+                System.out.println("\n\nERRO: OPERACAO INVALIDA!\nTENTE NOVAMENTE\n");
             }
             
         } while (escolha != -1);
@@ -58,10 +59,10 @@ public class Paciente extends Usuario{
 
         Scanner leitor = new Scanner(System.in);
 
-        System.out.println("Id do registro: ");
+        System.out.print("ID DO REGISTRO: ");
         id = leitor.nextLine();
 
-        System.out.println("Relato: ");
+        System.out.print("\nRELATO: ");
         registro = leitor.nextLine();
 
         Registro novoRegistro = new Registro(id, registro);
@@ -71,28 +72,28 @@ public class Paciente extends Usuario{
     public void editarRegistro() {
         String id_reg;
 
-        System.out.println("Insira o id do registro: ");
+        System.out.print("DIGITE O ID DO REGISTRO: ");
         Scanner leitor = new Scanner(System.in);
         id_reg = leitor.nextLine();
 
         for(int i = 0; i < this.registros.size(); i++) {
             Registro registro = registros.get(i);
             if(registro.id.equals(id_reg)) {
-                System.out.println("Digite o novo registro: ");
+                System.out.print("NOVO REGISTRO: ");
                 String novoRegistro = leitor.nextLine();
                 registros.get(i).edit(novoRegistro);
-                System.out.println("Registro alterado.");
+                System.out.println("\nREGISTRO ALTERADO COM SUCESSO.\n");
                 return;
             }
         }
 
-        System.out.println("Registro não encontrado.");
+        System.out.println("\nERRO: REGISTRO NAO ENCONTRADO!\nTENTE NOVAMENTE\n");
     }
 
     public void excluirRegistro() {
         String id_reg;
 
-        System.out.println("Insira o id do registro: ");
+        System.out.print("DIGITE O ID DO REGISTRO: ");
         Scanner leitor = new Scanner(System.in);
         id_reg = leitor.nextLine();
 
@@ -100,18 +101,18 @@ public class Paciente extends Usuario{
             Registro registro = registros.get(i);
             if(registro.id.equals(id_reg)) {
                 registros.remove(i);
-                System.out.println("Registro removido");
+                System.out.println("\nREGISTRO EXCLUIDO COM SUCESSO.\n");
                 return;
             }
         }
 
-        System.out.println("Registro não encontrado");
+        System.out.println("\nERRO: REGISTRO NAO ENCONTRADO!\nTENTE NOVAMENTE\n");
     }
 
     public void perfil() {
-        System.out.println("Nome: " + this.name);
+        System.out.println("NOME: " + this.name);
 
-        System.out.println("Registros: ");
+        System.out.println("REGISTROS: ");
         for(Registro registro : this.registros) {
             registro.show();
         }
@@ -121,21 +122,21 @@ public class Paciente extends Usuario{
         Scanner leitor = new Scanner(System.in);
 
         if(!this.id_psico.equals("null")){
-            System.out.println("Voce ja tem um Psicologo");
+            System.out.println("\nERRO: VOCE JA POSSUI UM PSICOLOGO VINCULADO!\n");
             return;
         }
 
-        System.out.println("ID do psicologo: ");
+        System.out.print("ID DO PSICOLOGO: ");
         String id_psicologo = leitor.nextLine();
         
         Psicologo psicologo = Psicologo.achePorId(psicologos, id_psicologo);
 
         if (psicologo == null) {
-            System.out.println("Psicologo nao encontrado.");
+            System.out.println("\nERRO: PSICOLOGO NAO ENCONTRADO!\nTENTE NOVAMENTE\n");
             return;
         } else {
             this.id_psico = psicologo.id;
-            System.out.println("Paciente vinculado.");
+            System.out.println("\nPSICOLOGO VINCULADO COM SUCESSO.\n");
         }
     }
 
@@ -149,10 +150,10 @@ public class Paciente extends Usuario{
 
     public void desvincularPsicologo(){
         if (this.id_psico.equals("null")) {
-            System.out.println("Voce nao tem psicologo.");
+            System.out.println("\nERRO: VOCE NAO POSSUI UM PSICOLOGO VINCULADO!\n");
             return;
         }
-        System.out.println("Psicologo desvinculado.");
+        System.out.println("\nPSICOLOGO DESVINCULADO COM SUCESSO.\n");
         this.id_psico = "null";
     }
 

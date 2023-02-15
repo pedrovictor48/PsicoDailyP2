@@ -32,10 +32,10 @@ public class Consulta {
 
     public boolean setHorario(ArrayList<Consulta> consultas) {
         Scanner leitor = new Scanner(System.in);
-        System.out.println("Digite o início da sessão (hh:mm dd-mm-yyyy)");
+        System.out.println("DIGITE O HORARIO DE INICIO DA SESSAO (hh:mm dd-mm-yyyy)");
         String hora_inicio = leitor.nextLine();
 
-        System.out.println("Digite o fim da sessão (hh:mm dd-mm-yyyy)");
+        System.out.println("DIGITE O HORARIO DE TERMINO DA SESSAO (hh:mm dd-mm-yyyy)");
         String hora_termino = leitor.nextLine();
 
         SimpleDateFormat f = new SimpleDateFormat("HH:mm dd-MM-yyyy");
@@ -46,7 +46,7 @@ public class Consulta {
             date_termino = f.parse(hora_termino);
         }
         catch (Exception e) {
-            System.out.println("Horário inválido");
+            System.out.println("\nERRO: HORARIO INVALIDO!\nTENTE NOVAMENTE\n");
             return false;
         }
         
@@ -55,17 +55,17 @@ public class Consulta {
             this.termino = date_termino;
             return true;
         }
-        System.out.println("Já existe consulta nesse horário");
+        System.out.println("ERRO: JA EXISTE UMA CONSULTA NESSE HORARIO!\nTENTE NOVAMENTE\n");
         return false;
     }
     
     public void printarDoPsicologo(ArrayList<Paciente> pacientes) {
         Paciente p = Paciente.achePorId(pacientes, this.id_paciente);
-        System.out.println("Consulta marcada das " + this.inicio.toString() + "às" + this.termino.toString() + " com o paciente " + p.name);
+        System.out.println("CONSULTA MARCADA!\nHORARIO: " + this.inicio.toString() + " - " + this.termino.toString() + "\nPACIENTE: " + p.name);
     }
 
     public void printarDoPaciente(ArrayList<Psicologo> psicologos) {
         Psicologo p = Psicologo.achePorId(psicologos, this.id_psicologo);
-        System.out.println("Consulta marcada das " + this.inicio.toString() + "às" + this.termino.toString() + " com " + p.name);
+        System.out.println("CONSULTA MARCADA!\nHORARIO: " + this.inicio.toString() + " - " + this.termino.toString() + "\nPACIENTE: " + p.name);
     }
 }

@@ -14,14 +14,15 @@ public class Psicologo extends Usuario{
         int escolha = -1;
         Scanner leitor = new Scanner(System.in);
         do  { 
-            System.out.println("\nDigite a operacao que voce deseja fazer: ");
-            System.out.println("[1] - Exibir pacientes.");
-            System.out.println("[2] - Mostrar registros.");
-            System.out.println("[3] - Marcar consulta.");
-            System.out.println("[4] - Vincular paciente.");
-            System.out.println("[5] - Desvincular paciente.");
-            System.out.println("[6] - Exibir consultas.");
-            System.out.println("[-1] - Sair do menu do psicólogo.");
+            System.out.println("MENU DO PSICOLOGO\n");
+            System.out.println("[1] - EXIBIR PACIENTES");
+            System.out.println("[2] - EXIBIR REGISTROS");
+            System.out.println("[3] - MARCAR CONSULTA");
+            System.out.println("[4] - VINCULAR PACIENTE");
+            System.out.println("[5] - DESVINCULAR PACIENTE");
+            System.out.println("[6] - EXIBIR CONSULTAS");
+            System.out.println("[-1] - SAIR DO MENU");
+            System.out.print("DIGITE A OPERACAO: ");
             
             
             escolha = leitor.nextInt();
@@ -41,7 +42,7 @@ public class Psicologo extends Usuario{
                 this.exibirConsultas(listaPacientes, consultas);
             }
             else if(escolha != -1){
-                System.out.println("Digite uma opcao valida!");
+                System.out.println("\n\nERRO: OPERACAO INVALIDA!\nTENTE NOVAMENTE\n");
             }
         } while(escolha != -1);
     }
@@ -64,22 +65,22 @@ public class Psicologo extends Usuario{
 
         if (!achou)
         {
-            System.out.println("\nVOCÊ NÃO TEM NENHUM PACIENTE.");
+            System.out.println("\nERRO: VOCÊ NÃO POSSUI NENHUM PACIENTE VINCULADO!");
         }
     }
 
     public void ExibirRegistros(ArrayList<Paciente> listaPacientes)
     {
-        System.out.println("Digite o id do paciente que voce deseja acessar os registros: ");
+        System.out.print("DIGITE O ID DO PACIENTE: ");
         Scanner leitor = new Scanner(System.in);
         String id_paciente = leitor.nextLine();
 
         Paciente paciente = Paciente.achePorId(listaPacientes, id_paciente);
         if(paciente == null) {
-            System.out.println("Paciente não encontrado.");
+            System.out.println("\nERRO: PACIENTE NAO ENCONTRADO!\nTENTE NOVAMENTE\n");
         }
         else if (!paciente.id_psico.equals(id)) {
-            System.out.println("Paciente não associado.");
+            System.out.println("\nERRO: PACIENTE NAO VINCULADO!\nTENTE NOVAMENTE\n");
         }
         else {
             paciente.perfil();
@@ -89,34 +90,34 @@ public class Psicologo extends Usuario{
     public void vincularPaciente(ArrayList<Paciente> listaPacientes){
 
         Scanner leitor = new Scanner(System.in);
-        System.out.println("Digite o id do paciente que voce deseja vincular:");
+        System.out.print("DIGITE O ID DO PACIENTE:");
         String id_paciente = leitor.nextLine();
 
         Paciente paciente = Paciente.achePorId(listaPacientes, id_paciente);
 
         if (paciente == null) {
-            System.out.println("Paciente nao encontrado.");
+            System.out.println("\nERRO: PACIENTE NAO ENCONTRADO!\nTENTE NOVAMENTE\n");
             return;
         } else if (paciente.id_psico.equals("null")) {
             paciente.id_psico = id;
-            System.out.println("Paciente vinculado.");
+            System.out.println("\nPACIENTE VINCULADO COM SUCESSO.\n");
         } else {
-            System.out.println("Paciente ja possui psicologo vinculado.");
+            System.out.println("\nERRO: O PACIENTE JA POSSUI VINCULO COM OUTRO PSICOLOGO!\nTENTE NOVAMENTE\n");
         }
     }
 
     public void desvincularPaciente(ArrayList<Paciente> listaPacientes){
         Scanner leitor = new Scanner(System.in);
-        System.out.println("Digite o id do paciente que voce deseja desvincular:");
+        System.out.print("DIGITE O ID DO PACIENTE:");
         String id_paciente = leitor.nextLine();
 
         Paciente paciente = Paciente.achePorId(listaPacientes, id_paciente);
 
         if (paciente == null) {
-            System.out.println("Paciente nao encontrado.");
+            System.out.println("\nERRO: PACIENTE NAO ENCONTRADO!\nTENTE NOVAMENTE\n");
             return;
         }else if (paciente.id_psico != id) {
-            System.out.println("Ele nao e seu paciente.");
+            System.out.println("\nERRO: PACIENTE NAO VINCULADO!\nTENTE NOVAMENTE\n");
             return;
         }
 
@@ -126,17 +127,17 @@ public class Psicologo extends Usuario{
     public void marcarConsulta(ArrayList<Paciente> listaPaciente, ArrayList<Consulta> consultas) {
         String id_paciente;
         Scanner leitor = new Scanner(System.in);
-        System.out.println("Insira o id do paciente: ");
+        System.out.print("DIGITE O ID DO PACIENTE: ");
         id_paciente = leitor.nextLine();
         Paciente paciente = Paciente.achePorId(listaPaciente, id_paciente);
         if(paciente == null) {
-            System.out.println("Esse paciente não está vinculado");
+            System.out.println("\nERRO: PACIENTE NAO VINCULADO!\nTENTE NOVAMENTE\n");
         }
         else if(!paciente.id_psico.equals(this.id)) {
-            System.out.println("Esse paciente não está vinculado");
+            System.out.println("\nERRO: PACIENTE NAO VINCULADO!\nTENTE NOVAMENTE\n");
         }
         else {
-            System.out.println("Insira o id da consulta: ");
+            System.out.print("DIGITE O ID DA CONSULTA: ");
             String id_consulta = leitor.nextLine();
 
             Consulta consulta = new Consulta(id_paciente, this.id, id_consulta);
@@ -144,10 +145,10 @@ public class Psicologo extends Usuario{
             do {
                 flag = consulta.setHorario(consultas);
                 if(!flag) {
-                    System.out.println("Deseja tentar novamente? (s/n)");
+                    System.out.println("\nDESEJA TENTAR NOVAMENTE? (s/n): ");
                     String ans = leitor.nextLine();
                     if(!ans.equals("s")) {
-                        System.out.println("Consulta não foi marcada");
+                        System.out.println("\nCONSULTA NAO FOI MARCADA\n");
                         return;
                     }
                 }
