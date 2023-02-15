@@ -43,14 +43,14 @@ public class App {
                 addUser();
 
                 // printando lista de usuários:
-                System.out.println("\nPrintando Psicologos");
-                for(Psicologo p : psicologos) {
-                    System.out.println(p.name);
-                }
-                System.out.println("\nPrintando Pacientes");
-                for(Paciente p : pacientes){
-                    System.out.println(p.name);
-                }
+                // System.out.println("\nPrintando Psicologos");
+                // for(Psicologo p : psicologos) {
+                //     System.out.println(p.name);
+                // }
+                // System.out.println("\nPrintando Pacientes");
+                // for(Paciente p : pacientes){
+                //     System.out.println(p.name);
+                // }
             }
             else if(escolha == 2){
                 excluirUser();

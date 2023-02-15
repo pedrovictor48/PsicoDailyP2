@@ -170,9 +170,7 @@ public class Psicologo extends Usuario{
 
     static Psicologo achePorId(ArrayList<Psicologo> lista, String id) {
         for(Psicologo psicologo: lista) {
-            System.out.println(psicologo.id + psicologo.name);
             if(psicologo.id.equals(id)){
-                System.out.println(psicologo.id + psicologo.name);
                 return psicologo;
             }
         }

@@ -166,9 +166,7 @@ public class Paciente extends Usuario{
 
     public static Paciente achePorId(ArrayList<Paciente> lista, String id) {
         for(Paciente paciente: lista) {
-            System.out.println(paciente.id + paciente.name);
             if(paciente.id.equals(id))
-                System.out.println("Achou paciente");
                 return paciente;
         }
         return null;
